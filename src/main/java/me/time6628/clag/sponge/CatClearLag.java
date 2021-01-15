@@ -9,7 +9,6 @@ import me.time6628.clag.sponge.config.ConfigLoader;
 import me.time6628.clag.sponge.config.MessagesConfig;
 import me.time6628.clag.sponge.handlers.ItemManager;
 import me.time6628.clag.sponge.handlers.MobEventHandler;
-import me.time6628.clag.sponge.runnables.EntityChecker;
 import me.time6628.clag.sponge.runnables.ItemClearer;
 import me.time6628.clag.sponge.runnables.ItemClearingWarning;
 import ninja.leaping.configurate.objectmapping.GuiceObjectMapperFactory;
@@ -101,11 +100,6 @@ public class CatClearLag {
                         .interval(cclConfig.interval, TimeUnit.MINUTES)
                         .name("CatClearLag Removal Warnings")
                         .submit(this)));
-        tasks.add(builder.execute(new EntityChecker())
-                .delay(cclConfig.limits.entityCheckInterval, TimeUnit.MINUTES)
-                .interval(cclConfig.limits.entityCheckInterval, TimeUnit.MINUTES)
-                .name("CatClearLag hostile checker")
-                .submit(this));
     }
 
     @Listener
@@ -133,11 +127,6 @@ public class CatClearLag {
                             .name("CatClearLag Removal Warnings")
                             .submit(this)));
         }
-        tasks.add(scheduler.createTaskBuilder().execute(new EntityChecker())
-                .delay(cclConfig.limits.entityCheckInterval, TimeUnit.MINUTES)
-                .interval(cclConfig.limits.entityCheckInterval, TimeUnit.MINUTES)
-                .name("CatClearLag hostile checker")
-                .submit(this));
     }
 
     private void registerEvents() {
@@ -196,17 +185,10 @@ public class CatClearLag {
         return cclConfig.limits.mobLimitPerChunk;
     }
 
-    public int getHostileLimit() {
-        return cclConfig.limits.hostileLimit;
-    }
-
     public Game getGame() {
         return game;
     }
 
-    public int getXpOrbLimit() {
-        return cclConfig.limits.maxXPOrbs;
-    }
 
     public File getConfigDir() {
         return configDir;

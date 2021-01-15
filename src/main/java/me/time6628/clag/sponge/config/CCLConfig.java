@@ -76,14 +76,6 @@ public class CCLConfig {
         @Setting("Max Mobs Per Chunk")
         public int mobLimitPerChunk = 20;
 
-        @Setting("Hostile Limit")
-        public int hostileLimit = 500;
-
-        @Setting("Entity Check Interval")
-        public int entityCheckInterval = 5;
-
-        @Setting("XP Orb Limit")
-        public int maxXPOrbs = 300;
     }
 
     @ConfigSerializable
